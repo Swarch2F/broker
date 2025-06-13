@@ -69,7 +69,7 @@ async function processMessage(message, retryCount = 0) {
     try {
         const response = await axios({
             method: message.method,
-            url: `http://component-2-1:8080${message.path}`,
+            url: `http://gx_be_proasig:8080${message.path}`,
             data: message.body,
             headers: message.headers
         });
