@@ -7,7 +7,7 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 const RABBITMQ_URL = process.env.RABBITMQ_URL || 'amqp://rabbitmq:5672';
-
+const PROASIG_SERVICE_URL = process.env.PROASIG_SERVICE_URL;
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -69,7 +69,7 @@ async function processMessage(message, retryCount = 0) {
     try {
         const response = await axios({
             method: message.method,
-            url: `http://gx_be_proasig:8080${message.path}`,
+            url: `${PROASIG_SERVICE_URL}${message.path}`,
             data: message.body,
             headers: message.headers
         });
