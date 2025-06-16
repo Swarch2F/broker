@@ -176,7 +176,10 @@ app.all('/broker/*', async (req, res) => {
             method: req.method,
             path: req.path.replace('/broker', ''),
             body: req.body,
-            headers: req.headers,
+            headers: {
+                ...req.headers,
+                host: new URL(PROASIG_SERVICE_URL).host
+            },
             timestamp: new Date().toISOString()
         };
 
